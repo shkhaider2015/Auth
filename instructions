@@ -1,0 +1,4 @@
+from application import db
+from application.model import User
+db.create_all()
+exit()
