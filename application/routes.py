@@ -1,4 +1,4 @@
-from flask import jsonify
+from flask import jsonify, request
 from application import app
 
 
@@ -9,4 +9,7 @@ def home():
 
 @app.route('/adduser', methods=['POST'])
 def add_user():
-    return jsonify({ 'status' : 'ok' })
+    naem = request.json['name']
+    email = request.json['email']
+    image_file = request.json['password']
+    return jsonify({ 'status' : 'ok', 'name' : naem })
