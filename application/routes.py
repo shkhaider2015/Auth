@@ -9,7 +9,8 @@ def home():
 
 @app.route('/adduser', methods=['POST'])
 def add_user():
-    naem = request.json['name']
-    email = request.json['email']
-    image_file = request.json['password']
-    return jsonify({ 'status' : 'ok', 'name' : naem })
+    name = request.form['name']
+    email = request.form['email']
+    password = request.form['password']
+    image_file = request.files['image_file']
+    return jsonify({ 'status' : 'ok', 'name' : name })
