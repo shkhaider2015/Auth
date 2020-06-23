@@ -7,7 +7,7 @@ def home():
     return jsonify({ 'status' : 'ok' })
 
 
-@app.route('/adduser', methods=['POST'])
+@app.route('/createuser', methods=['POST'])
 def add_user():
     name = request.json['name']
     email = request.json['email']
