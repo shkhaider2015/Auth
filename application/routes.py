@@ -25,5 +25,9 @@ def add_user():
 def checkAvailablity(email):
     email = email
     user = User.query.filter_by(email=email).first()
-    print(user.name)
-    return jsonify({ 'name' : user.name, 'email' : user.email, 'password' : user.password})
+    if user:
+        print(user.name)
+        return jsonify({ 'name' : user.name, 'email' : user.email, 'password' : user.password})
+    else:
+        print("User Is None")
+        return jsonify({ 'name' : None, 'email' : None, 'password' : None })
