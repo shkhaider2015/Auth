@@ -50,7 +50,7 @@ def login_route(email, password):
         return abort(404)
 
 
-@app.route("/index")
+@app.route("/index", methods=['GET'])
 @login_required
 def index_home():
     return jsonify({ 'status' : "user is logged in" })
