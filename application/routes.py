@@ -1,6 +1,7 @@
-from flask import jsonify, request
-from application import app, db
+from flask import jsonify, request, abort
+from application import app, db, login_manager
 from application.models import User
+from flask_login import login_required, login_user
 
 
 @app.route('/')
@@ -31,3 +32,25 @@ def checkAvailablity(email):
     else:
         print("User Is None")
         return jsonify({ 'name' : None, 'email' : None, 'password' : None })
+
+@app.route("/login/<string:email>+<string:password>", methods=['GET'])
+def login_route(email, password):
+    em = email
+    pas = password
+    print(em, pas)
+    user = User.query.filter_by(email=email).first()
+    if user:
+        if user.password == password:
+            login_user(user, remember=True)
+            return jsonify({ 'email' : user.email, 'password' : user.password })
+            
+        else:
+            return abort(404)
+    else:
+        return abort(404)
+
+
+@app.route("/index")
+@login_required
+def index_home():
+    return jsonify({ 'status' : "user is logged in" })
