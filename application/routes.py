@@ -1,7 +1,7 @@
 from flask import jsonify, request, abort
 from application import app, db, login_manager
 from application.models import User
-from flask_login import login_required, login_user
+from flask_login import login_required, login_user, current_user , AUTH_HEADER_NAME
 
 
 @app.route('/')
@@ -42,6 +42,7 @@ def login_route(email, password):
     if user:
         if user.password == password:
             login_user(user, remember=True)
+            print(current_user)
             return jsonify({ 'email' : user.email, 'password' : user.password })
             
         else:
