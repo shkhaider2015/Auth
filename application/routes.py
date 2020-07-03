@@ -43,6 +43,7 @@ def login_route(email, password):
         if user.password == password:
             login_user(user, remember=True)
             print(current_user)
+            // commit
             return jsonify({ 'email' : user.email, 'password' : user.password })
             
         else:
